@@ -25,7 +25,7 @@ annotationProcessor 'com.github.CodingGay.BlackReflection:compiler:1.0.9'
 ```
 
 ### Demo
-#### 1. If you need to reflect the methods of top.niunaijun.app.bean.TestReflection, please refer to：[MainActivity.java](https://github.com/CodingGay/BlackReflection/blob/main/app/src/main/java/top/niunaijun/app/MainActivity.java)
+#### 1. If you need to reflect the methods of red.app.bean.TestReflection, please refer to：[MainActivity.java](https://github.com/CodingGay/BlackReflection/blob/main/app/src/main/java/top/niunaijun/app/MainActivity.java)
 ```java
 public class TestReflection {
     public static final String TAG = "TestConstructor";
@@ -60,14 +60,14 @@ public class TestReflection {
 ```
 You can write an interface like this:
 ```java
-@BClass(top.niunaijun.app.bean.TestReflection.class)
+@BClass(red.app.bean.TestReflection.class)
 public interface TestReflection {
 
     @BConstructor
-    top.niunaijun.app.bean.TestReflection _new(String a, String b);
+    red.app.bean.TestReflection _new(String a, String b);
 
     @BConstructor
-    top.niunaijun.app.bean.TestReflection _new(String a);
+    red.app.bean.TestReflection _new(String a);
 
     @BMethod
     String testContextInvoke(String a, int b);
@@ -141,21 +141,21 @@ Annotation | Target | Description
 
 ### Obfuscation rules
 ```
--keep class top.niunaijun.blackreflection.** {*; }
--keep @top.niunaijun.blackreflection.annotation.BClass class * {*;}
--keep @top.niunaijun.blackreflection.annotation.BClassName class * {*;}
--keep @top.niunaijun.blackreflection.annotation.BClassNameNotProcess class * {*;}
+-keep class red.blackreflection.** {*; }
+-keep @red.blackreflection.annotation.BClass class * {*;}
+-keep @red.blackreflection.annotation.BClassName class * {*;}
+-keep @red.blackreflection.annotation.BClassNameNotProcess class * {*;}
 -keepclasseswithmembernames class * {
-    @top.niunaijun.blackreflection.annotation.BField.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BFieldNotProcess.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BFieldSetNotProcess.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BFieldCheckNotProcess.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BMethod.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BStaticField.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BStaticMethod.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BMethodCheckNotProcess.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BConstructor.* <methods>;
-    @top.niunaijun.blackreflection.annotation.BConstructorNotProcess.* <methods>;
+    @red.blackreflection.annotation.BField.* <methods>;
+    @red.blackreflection.annotation.BFieldNotProcess.* <methods>;
+    @red.blackreflection.annotation.BFieldSetNotProcess.* <methods>;
+    @red.blackreflection.annotation.BFieldCheckNotProcess.* <methods>;
+    @red.blackreflection.annotation.BMethod.* <methods>;
+    @red.blackreflection.annotation.BStaticField.* <methods>;
+    @red.blackreflection.annotation.BStaticMethod.* <methods>;
+    @red.blackreflection.annotation.BMethodCheckNotProcess.* <methods>;
+    @red.blackreflection.annotation.BConstructor.* <methods>;
+    @red.blackreflection.annotation.BConstructorNotProcess.* <methods>;
 }
 ```
 ### License

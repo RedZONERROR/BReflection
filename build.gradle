@@ -23,6 +23,6 @@ task clean(type: Delete) {
 }
 
 ext {
-    group = 'top.niunaijun.blackreflection'
+    group = 'red.blackreflection'
     version = '1.0.0'
 }
