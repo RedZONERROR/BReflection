@@ -5,15 +5,15 @@ plugins {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc2'
-    compileOnly 'com.google.auto.service:auto-service:1.0-rc2'
-    implementation 'com.squareup:javapoet:1.8.0'
+    annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
+    compileOnly 'com.google.auto.service:auto-service:1.1.1'
+    implementation 'com.squareup:javapoet:1.13.0'
     implementation project(":core")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 
