@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlackReflection">
         <activity 
-            android:name="top.niunaijun.app.MainActivity"
+            android:name="red.app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

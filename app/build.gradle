@@ -6,7 +6,7 @@ android {
     compileSdk 35
     
     defaultConfig {
-        applicationId "top.niunaijun.blackreflection"
+        applicationId "red.blackreflection"
         minSdk 21
         targetSdk 35
         versionCode 1
@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     
-    namespace 'top.niunaijun.blackreflection'
+    namespace 'red.blackreflection'
 
     buildTypes {
         debug {
