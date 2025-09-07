@@ -123,10 +123,22 @@ jobs:
       
     - name: Commit version update
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "redzonerror@gmail.com"
+        git config --local user.name "S Kumar"
         git add build.gradle
-        git commit -m "Auto version bump to ${{ steps.get_version.outputs.new_version }}" || exit 0
+        
+        # Create natural commit message based on bump type
+        if [ "${{ steps.get_version.outputs.bump_type }}" = "INITIAL" ]; then
+          COMMIT_MSG="Initial release v${{ steps.get_version.outputs.new_version }}"
+        elif [ "${{ steps.get_version.outputs.bump_type }}" = "MAJOR" ]; then
+          COMMIT_MSG="Major update v${{ steps.get_version.outputs.new_version }}"
+        elif [ "${{ steps.get_version.outputs.bump_type }}" = "MINOR" ]; then
+          COMMIT_MSG="New features in v${{ steps.get_version.outputs.new_version }}"
+        else
+          COMMIT_MSG="Bug fixes and improvements v${{ steps.get_version.outputs.new_version }}"
+        fi
+        
+        git commit -m "$COMMIT_MSG" || exit 0
         
     - name: Create and push tag
       run: |
