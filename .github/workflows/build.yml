@@ -10,6 +10,9 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      packages: write
     
     steps:
     - uses: actions/checkout@v4
@@ -50,8 +53,8 @@ jobs:
           FIRST_RELEASE=true
         fi
         
-        echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
-        echo "first_release=$FIRST_RELEASE" >> $GITHUB_OUTPUT
+        echo "latest_tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
+        echo "first_release=$FIRST_RELEASE" >> "$GITHUB_OUTPUT"
         
         # Get commit message
         COMMIT_MSG=$(git log -1 --pretty=%B)
@@ -92,9 +95,9 @@ jobs:
           NEW_TAG="v$NEW_VERSION"
         fi
         
-        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-        echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
-        echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
+        echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+        echo "new_tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
+        echo "bump_type=$BUMP_TYPE" >> "$GITHUB_OUTPUT"
         echo "Current version: $LATEST_TAG"
         echo "New version: $NEW_TAG ($BUMP_TYPE)"
         
@@ -111,6 +114,13 @@ jobs:
     - name: Build libraries
       run: ./gradlew publishToMavenLocal
       
+    - name: List build artifacts
+      run: |
+        echo "=== Core build artifacts ==="
+        ls -la core/build/libs/ || echo "No core artifacts found"
+        echo "=== Compiler build artifacts ==="
+        ls -la compiler/build/libs/ || echo "No compiler artifacts found"
+      
     - name: Commit version update
       run: |
         git config --local user.email "action@github.com"
@@ -125,12 +135,12 @@ jobs:
         git push origin main
         
     - name: Create Release
-      uses: actions/create-release@v1
+      uses: softprops/action-gh-release@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.get_version.outputs.new_tag }}
-        release_name: BReflection ${{ steps.get_version.outputs.new_tag }}
+        name: BReflection ${{ steps.get_version.outputs.new_tag }}
         body: |
           ## Auto Release ${{ steps.get_version.outputs.new_tag }}
           
@@ -146,6 +156,10 @@ jobs:
           ```
         draft: false
         prerelease: false
+        files: |
+          core/build/libs/*.jar
+          compiler/build/libs/*.jar
+        fail_on_unmatched_files: false
         
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
