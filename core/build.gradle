@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'com.github.dcendents.android-maven'
+    id 'maven-publish'
 }
 
 tasks.withType(JavaCompile) {
@@ -14,3 +14,13 @@ java {
 
 group = rootProject.ext.group
 version = rootProject.ext.version
+publishing
+ {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = rootProject.ext.group
+            version = rootProject.ext.version
+        }
+    }
+}
