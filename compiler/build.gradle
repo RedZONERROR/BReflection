@@ -3,8 +3,11 @@ plugins {
     id 'maven-publish'
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
     compileOnly 'com.google.auto.service:auto-service:1.1.1'
     implementation 'com.squareup:javapoet:1.13.0'
@@ -14,14 +17,8 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-}
-
-
-repositories {
-    mavenCentral()
-    maven {
-        url uri('localRepo')
-    }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 group = rootProject.ext.group
@@ -32,7 +29,35 @@ publishing {
         maven(MavenPublication) {
             from components.java
             groupId = rootProject.ext.group
+            artifactId = 'compiler'
             version = rootProject.ext.version
+            
+            pom {
+                name = 'BReflection Compiler'
+                description = 'Annotation processor for BReflection - Modern Java reflection library'
+                url = 'https://github.com/redzonerror/BReflection'
+                
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'redzonerror'
+                        name = 'S Kumar'
+                        email = 'redzonerror@gmail.com'
+                    }
+                }
+                
+                scm {
+                    connection = 'scm:git:git://github.com/redzonerror/BReflection.git'
+                    developerConnection = 'scm:git:ssh://github.com:redzonerror/BReflection.git'
+                    url = 'https://github.com/redzonerror/BReflection/tree/main'
+                }
+            }
         }
     }
 }

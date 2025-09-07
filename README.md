@@ -1,4 +1,4 @@
-# Java Reflection Library · BlackReflection (Custom Fork)
+# BReflection - Java Reflection Library
 
 ![](https://img.shields.io/badge/language-java-brightgreen.svg)
 ![](https://img.shields.io/badge/gradle-8.12-blue.svg)
@@ -7,23 +7,23 @@
 
 ## About This Fork
 
-This is a **custom fork** of the original BlackReflection library, completely rewritten and modernized for current development needs. We have removed all external dependencies and made significant improvements while maintaining the core functionality.
+BReflection is a modern Java reflection library, forked and completely rewritten from the original BlackReflection. This version has been modernized for current development needs with removed external dependencies and significant improvements while maintaining core functionality.
 
 ### Original Project Credits
 - **Original Author**: [Milk (CodingGay)](https://github.com/CodingGay)
 - **Original Repository**: [BlackReflection](https://github.com/CodingGay/BlackReflection)
 - **Original License**: Apache License 2.0
 
-### Why This Fork?
+### Why BReflection?
 
-The original BlackReflection used the package name `top.niunaijun.blackreflection`, which is widely used across many projects. To avoid conflicts and provide better isolation, we've created this custom version with:
+The original BlackReflection used the package name `top.niunaijun.blackreflection`, which is widely used across many projects. To avoid conflicts and provide better isolation, BReflection provides:
 
 - **Custom package name**: `red.blackreflection` (avoiding conflicts with the original)
 - **Modern toolchain**: Updated to latest Gradle, Java 17, and Android tools
 - **Independent development**: No external dependencies or JitPack requirements
 - **Local library support**: Easy to integrate as local JAR files
 
-## Major Changes in This Fork
+## Major Changes in BReflection
 
 ### 🔄 Package Rename
 - **Old Package**: `top.niunaijun.blackreflection`
@@ -52,33 +52,52 @@ The original BlackReflection used the package name `top.niunaijun.blackreflectio
 
 ## Installation & Usage
 
-### Method 1: Using Local JAR Files (Recommended)
+### Method 1: Using JitPack (Recommended)
 
-1. **Build the libraries**:
-   ```cmd
-   .\build-and-copy-libs.bat
+Add JitPack repository to your root `build.gradle`:
+```gradle
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Add dependencies to your app `build.gradle`:
+```gradle
+dependencies {
+    implementation 'com.github.redzonerror.BReflection:core:1.0.0'
+    annotationProcessor 'com.github.redzonerror.BReflection:compiler:1.0.0'
+}
+```
+
+### Method 2: Using GitHub Releases
+
+1. Download JAR files from [Releases](https://github.com/redzonerror/BReflection/releases)
+2. Copy to your project's `app/libs/` directory
+3. Add to your `app/build.gradle`:
+```gradle
+dependencies {
+    implementation files('libs/core-1.0.0.jar')
+    annotationProcessor files('libs/compiler-1.0.0.jar')
+}
+```
+
+### Method 3: Build from Source
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/redzonerror/BReflection.git
    ```
 
-2. **Copy JAR files** to your project's `app/libs/` directory:
-   - `core-1.0.0.jar`
-   - `compiler-1.0.0.jar`
-
-3. **Add to your `app/build.gradle`**:
-   ```gradle
-   dependencies {
-       implementation files('libs/core-1.0.0.jar')
-       annotationProcessor files('libs/compiler-1.0.0.jar')
-   }
-   ```
-
-### Method 2: Using Local Maven Repository
-
-1. **Publish to local Maven**:
-   ```cmd
+2. Build and publish to local Maven:
+   ```bash
    ./gradlew publishToMavenLocal
    ```
 
-2. **Add to your `build.gradle`**:
+3. Add to your `build.gradle`:
    ```gradle
    repositories {
        mavenLocal()
@@ -235,6 +254,12 @@ BReflection/
 └── README.md              # This file
 ```
 
+## Author
+
+**S Kumar** (redzonerror)
+- GitHub: [@redzonerror](https://github.com/redzonerror)
+- Email: redzonerror@gmail.com
+
 ## ProGuard/R8 Rules
 
 **Important**: Update your ProGuard rules to use the new package name:
@@ -277,7 +302,7 @@ If you're migrating from the original BlackReflection:
 
 ## Changelog
 
-### Version 1.0.0 (This Fork)
+### Version 1.0.0 (BReflection)
 - 🔄 **Package renamed** from `top.niunaijun.blackreflection` to `red.blackreflection`
 - 🚀 **Upgraded to Gradle 8.12** with configuration cache support
 - ☕ **Updated to Java 17** for better performance and modern features
@@ -289,7 +314,9 @@ If you're migrating from the original BlackReflection:
 
 ## Contributing
 
-This is a custom fork maintained independently. For the original project, please visit the [original repository](https://github.com/CodingGay/BlackReflection).
+BReflection is maintained by S Kumar (redzonerror). Contributions are welcome! Please feel free to submit issues and pull requests.
+
+For the original BlackReflection project, visit the [original repository](https://github.com/CodingGay/BlackReflection).
 
 ## Acknowledgments
 
@@ -300,7 +327,7 @@ This fork maintains the same Apache License 2.0 as the original project:
 
 ```
 Copyright 2022 Milk (Original BlackReflection)
-Copyright 2025 Custom Fork Contributors
+Copyright 2025 S Kumar (BReflection)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -317,4 +344,4 @@ limitations under the License.
 
 ---
 
-**Note**: This is an independent fork. For the original BlackReflection project, visit: https://github.com/CodingGay/BlackReflection
+**Note**: BReflection is an independent project based on BlackReflection. For the original project, visit: https://github.com/CodingGay/BlackReflection

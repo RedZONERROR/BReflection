@@ -10,17 +10,47 @@ tasks.withType(JavaCompile) {
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+    withJavadocJar()
 }
 
 group = rootProject.ext.group
 version = rootProject.ext.version
-publishing
- {
+
+publishing {
     publications {
         maven(MavenPublication) {
             from components.java
             groupId = rootProject.ext.group
+            artifactId = 'core'
             version = rootProject.ext.version
+            
+            pom {
+                name = 'BReflection Core'
+                description = 'Core runtime library for BReflection - Modern Java reflection library'
+                url = 'https://github.com/redzonerror/BReflection'
+                
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'redzonerror'
+                        name = 'S Kumar'
+                        email = 'redzonerror@gmail.com'
+                    }
+                }
+                
+                scm {
+                    connection = 'scm:git:git://github.com/redzonerror/BReflection.git'
+                    developerConnection = 'scm:git:ssh://github.com:redzonerror/BReflection.git'
+                    url = 'https://github.com/redzonerror/BReflection/tree/main'
+                }
+            }
         }
     }
 }

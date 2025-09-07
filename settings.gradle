@@ -1,4 +1,4 @@
-rootProject.name = "BlackReflection"
+rootProject.name = "BReflection"
 include ':app'
 include ':core'
 include ':compiler'
